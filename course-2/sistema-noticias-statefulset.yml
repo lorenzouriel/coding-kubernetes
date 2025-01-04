@@ -18,11 +18,25 @@ spec:
         envFrom: 
           - configMapRef:
               name: sistema-configmap
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80 
+          periodSeconds: 10
+          failureThreshold: 3
+          initialDelaySeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /inserir_noticias.php
+            port: 80 
+          periodSeconds: 10
+          failureThreshold: 5
+          initialDelaySeconds: 3
         volumeMounts:
           - name: imagens
-            mountPath: /var/www/html/uploads    # Corrigido de mounthPath para mountPath
+            mountPath: /var/www/html/uploads    
           - name: session
-            mountPath: /tmp                    # Corrigido de mounthPath para mountPath
+            mountPath: /tmp                    
       volumes:
         - name: imagens
           persistentVolumeClaim:
