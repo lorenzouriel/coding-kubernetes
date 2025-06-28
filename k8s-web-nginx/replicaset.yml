@@ -1,0 +1,18 @@
+kind: ReplicaSet
+metadata:
+  name: web-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: nginx
+          ports:
+            - containerPort: 80

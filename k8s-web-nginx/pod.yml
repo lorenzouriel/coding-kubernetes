@@ -1,0 +1,9 @@
+kind: Pod
+metadata:
+  name: web
+spec:
+  containers:
+    - name: web
+      image: nginx
+      ports:
+        - containerPort: 80
